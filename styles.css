@@ -1,0 +1,63 @@
+
+main {
+  margin:0px 40px 0px 210px; /* Same width as the sidebar + left position in px */
+  /* font-size: 28px; /* Increased text to enable scrolling */ */
+  padding: 0px 10px;
+
+}
+.sidenav {
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #064579;
+}
+
+section header {
+  font-size: 25px;
+}
+h1 {
+  margin: 0 auto;
+  font-size: 30px;
+}
+hr {
+  margin: 0 auto;
+  border: black solid 2px;
+  width: 90%;
+}
+p {
+  font-size: 16px;
+  line-height: 21px;
+}
+code {
+  background-color: hsl(240, 20%, 75%);
+  border-radius: 3px;
+  font-size: 16px;
+}
+.TEArea{
+  background-color: hsl(240, 20%, 75%);
+  padding: 5px;
+  border-radius: 10px;
+}
+.comment {
+  color: hsl(0, 0%, 35%);
+}
+li {
+  font-size: 17px;
+  font-weight: bold;
+}
