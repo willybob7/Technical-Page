@@ -43,10 +43,11 @@ hr {
 p {
   font-size: 16px;
   line-height: 21px;
+  width: 75%;
 }
 code {
   background-color: hsl(240, 20%, 75%);
-  border-radius: 3px;
+  border-radius: 2px;
   font-size: 16px;
 }
 .TEArea{
@@ -60,4 +61,14 @@ code {
 li {
   font-size: 17px;
   font-weight: bold;
+  color: white;
+  background-color: black;
+  width: 25%;
+  padding: 1px 4px 1px 20px;
+  margin-top: 3px;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+
 }
