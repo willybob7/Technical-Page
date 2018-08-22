@@ -10,7 +10,7 @@ main {
     position: fixed;
     z-index: 1;
     top: 20px;
-    left: 10px;
+    left: 0px;
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
@@ -71,4 +71,10 @@ li {
   font-size: 18px;
   font-weight: bold;
 
+}
+.none{
+  background-color: white;
+  list-style-type: circle;
+  color: black;
+  width: 100%;
 }
