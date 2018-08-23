@@ -9,7 +9,7 @@ main {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 20px;
+    top: 0px;
     left: 0px;
     background: #eee;
     overflow-x: hidden;
@@ -19,7 +19,7 @@ main {
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     color: #2196F3;
     display: block;
 }
@@ -66,15 +66,35 @@ li {
   width: 25%;
   padding: 1px 4px 1px 20px;
   margin-top: 3px;
+  border-radius: 3px;
 }
 .title {
   font-size: 18px;
   font-weight: bold;
 
 }
-.none{
+.nostyle{
   background-color: white;
   list-style-type: circle;
   color: black;
   width: 100%;
+}
+.none{
+  padding: 0px;
+  background: #eee;
+  margin: 0px;
+  width: 100%;
+  list-style-type: disc;
+  color: black;
+}
+.sublist{
+  padding-left: 10px;
+}
+.sublist li{
+  padding: 0px;
+  background: #eee;
+  margin: 0px;
+  width: 100%;
+  /* list-style-type: disc; */
+  color: black;
 }

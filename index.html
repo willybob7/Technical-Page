@@ -12,21 +12,32 @@
   <title>"This"</title>
 </head>
 <body>
-    <nav id="navbar">
-      <header>
-        <div class="sidenav">
-          <h1>"This"</h1>
-          <hr>
-          <a href="#about">Introduction</a>
-          <a href="#services">Syntax</a>
-          <a href="#clients">Global Context</a>
-          <a href="#contact">Function Context</a>
-          <a href="#contact">See Also</a>
-        </div>
-      </header>
-    </nav>
+  <nav id="navbar">
+    <header>
+      <div class="sidenav">
+        <h1>"This"</h1>
+        <hr>
+        <ul>
+          <li class="none"><a href="#Introduction" class="nav-link">Introduction</a></li>
+          <li class="none"><a href="#Syntax" class="nav-link">Syntax</a></li>
+          <li class="none"><a href="#Global_Context" class="nav-link">Global Context</a></li>
+          <li class="none"><a href="#Function_Context" class="nav-link">Function Context</a></li>
+          <ul class="sublist">
+            <li><a href="#Simple_Call">Simple Call</a></li>
+            <li><a href="#The_bind_method">The bind method</a></li>
+            <li><a href="#Arrow_functions">Arrow functions</a></li>
+            <li><a href="#As_an_object_method">As an objct method</a></li>
+            <li><a href="#As_a_constructor">As a constructor</a></li>
+            <li><a href="#As_a_DOM_event_handler">As a DOM event handler</a></li>
+            <li><a href="#In_an_inline_event_handler">In an inline event handler</a></li>
+          </ul>
+          <li class="none"><a href="#See_Also" class="nav-link">See Also</a></li>
+        </ul>
+      </div>
+    </header>
+  </nav>
 
-    <main id="main-doc">
+  <main id="main-doc">
     <section class="main-section" id="Introduction">
       <header>Introduction</header>
       <p>A function's <code>this</code> keyword behaves a little differently in JavaScript compared to other languages.
@@ -60,7 +71,7 @@
             <header>Function Context</header>
             <p>Inside a function, the value of <code>this</code> depends on how the function is called.</p>
             <ul>
-              <li>Simple Call</li>
+              <li id="Simple_Call">Simple Call</li>
               <p>Since the following code is not in strict mode,
                 and because the value of <code>this</code> is not set by the call, <code>this</code>
                 will default to the global object, which is <code>window</code> in a browser.</p>
@@ -139,7 +150,7 @@
                             bar.call('foo'); <span class="comment">// [object String]</span>
                           </code></div>
 
-                          <li>The bind method</li>
+                          <li id="The_bind_method">The bind method</li>
                           <p>ECMAScript 5 introduced <code>Function.prototype.bind</code>. Calling
                             <code>f.bind(someObject)</code> creates a new function with the same body and scope as <code>f</code>,
                             but where <code>this</code> occurs in the original function, in the new function it is permanently
@@ -159,39 +170,39 @@
                               console.log(o.a, o.f(), o.g(), o.h()); <span class="comment">// 37,37, azerty, azerty</span>
                             </code></div>
 
-                            <li>Arrow functions</li>
+                            <li id="Arrow_functions">Arrow functions</li>
                             <p>In arrow functions, <code>this</code> retains the value of the enclosing
                               lexical context's <code>this</code>. In global code, it will be set to the
                               global object:</p>
                               <div class="TEArea"><code>
                                 var globalObject = this;<br>
                                 var foo = (() => this);<br>
-                                console.log(foo() === globalObject); // true
+                                console.log(foo() === globalObject); <span class="comment">// true</span>
                               </code></div>
                               <br>
                               <div class="TEArea"><code>
-                                // Call as a method of an object<br>
+                                <span class="comment">// Call as a method of an object</span><br>
                                 var obj = {func: foo};<br>
-                                console.log(obj.func() === globalObject); // true<br>
+                                console.log(obj.func() === globalObject); <span class="comment">// true</span><br>
                                 <br>
-                                // Attempt to set this using call<br>
-                                console.log(foo.call(obj) === globalObject); // true<br>
+                                <span class="comment">// Attempt to set this using call</span><br>
+                                console.log(foo.call(obj) === globalObject); <span class="comment">// true</span><br>
                                 <br>
-                                // Attempt to set this using bind<br>
+                                <span class="comment">// Attempt to set this using bind</span><br>
                                 foo = foo.bind(obj);<br>
-                                console.log(foo() === globalObject); // true
+                                console.log(foo() === globalObject); <span class="comment">// true</span>
                               </code></div>
                               <p>No matter what, <code>foo</code>'s <code>this</code> is set to what it was
                                 when it was created (in the example above, the global object).
                                 The same applies to arrow functions created inside other functions:
                                 their <code>this</code> remains that of the enclosing lexical context.</p>
                                 <div class="TEArea"><code>
-                                  // Create obj with a method bar that returns a function that<br>
-                                  // returns its this. The returned function is created as <br>
-                                  // an arrow function, so its this is permanently bound to the<br>
-                                  // this of its enclosing function. The value of bar can be set<br>
-                                  // in the call, which in turn sets the value of the <br>
-                                  // returned function.<br>
+                                  <span class="comment">// Create obj with a method bar that returns a function that</span><br>
+                                  <span class="comment">// returns its this. The returned function is created as</span> <br>
+                                  <span class="comment">// an arrow function, so its this is permanently bound to the</span><br>
+                                  <span class="comment">// this of its enclosing function. The value of bar can be set</span><br>
+                                  <span class="comment">// in the call, which in turn sets the value of the</span> <br>
+                                  <span class="comment">// returned function.</span><br>
                                   var obj = {bar: function() {<br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var x = (() => this);<br>
@@ -202,18 +213,18 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;};<br>
                                     <br>
-                                    // Call bar as a method of obj, setting its this to obj<br>
-                                    // Assign a reference to the returned function to fn<br>
+                                    <span class="comment">// Call bar as a method of obj, setting its this to obj</span><br>
+                                    <span class="comment">// Assign a reference to the returned function to fn</span><br>
                                     var fn = obj.bar();<br>
                                     <br>
-                                    // Call fn without setting this, would normally default<br>
-                                    // to the global object or undefined in strict mode<br>
-                                    console.log(fn() === obj); // true<br>
+                                    <span class="comment">// Call fn without setting this, would normally default</span><br>
+                                    <span class="comment">// to the global object or undefined in strict mode</span><br>
+                                    console.log(fn() === obj); <span class="comment">// true</span><br>
                                     <br>
-                                    // But caution if you reference the method of obj without calling it<br>
+                                    <span class="comment">// But caution if you reference the method of obj without calling it</span><br>
                                     var fn2 = obj.bar;<br>
-                                    // Then calling the arrow function this is equals to window because it follows the this from bar.<br>
-                                    console.log(fn2()() == window); // true
+                                    <span class="comment">// Then calling the arrow function this is equals to window because it follows the this from bar.</span><br>
+                                    console.log(fn2()() == window); <span class="comment">// true</span>
                                   </code></div>
                                   <p>In the above, the function(call it anonymous function A) assigned to
                                     <code>obj.bar</code> returns another function(call it anonymous function B) that is
@@ -226,7 +237,7 @@
                                     or the global object (or any other method as in the previous example in the
                                     global execution context).</p>
 
-                                    <li>As an object method</li>
+                                    <li id="As_an_object_method">As an object method</li>
                                     <p>When a function is called as a method of an object,
                                       its <code>this</code> is set to the object the method is called on.</p>
                                       <p>In the following example, when <code>o.f()</code> is invoked, inside the function
@@ -239,7 +250,7 @@
                                               &nbsp;&nbsp;  }<br>
                                             };<br>
                                             <br>
-                                            console.log(o.f()); // 37
+                                            console.log(o.f()); <span class="comment">// 37</span>
                                           </code></div>
                                           <p>Note that this behavior is not at all affected by how or
                                             where the function was defined. In the previous example,
@@ -256,7 +267,7 @@
                                               <br>
                                               o.f = independent;<br>
                                               <br>
-                                              console.log(o.f()); // 37
+                                              console.log(o.f()); <span class="comment">// 37</span>
                                             </code></div>
                                             <p>This demonstrates that it matters only
                                               that the function was invoked from the <code>f</code>
@@ -271,7 +282,7 @@
                                                 immediate reference is all that matters.</p>
                                                 <div class="TEArea"><code>
                                                   o.b = {g: independent, prop: 42};<br>
-                                                  console.log(o.b.g()); // 42
+                                                  console.log(o.b.g()); <span class="comment">// 42</span>
                                                 </code></div>
                                                 <p class="title"><code class="title">this</code> on the object's prototype chain</p>
                                                 <p>The same notion holds true for methods defined somewhere on the object's prototype chain.
@@ -283,7 +294,7 @@
                                                     p.a = 1;<br>
                                                     p.b = 4;<br>
                                                     <br>
-                                                    console.log(p.f()); // 5
+                                                    console.log(p.f()); <span class="comment">// 5</span>
                                                   </code></div>
                                                   <p>In this example, the object assigned to the variable <code>p</code>
                                                     doesn't have its own <code>f</code> property, it inherits it from its prototype.
@@ -314,125 +325,122 @@
                                                           Object.defineProperty(o, 'sum', {<br>
                                                             &nbsp;&nbsp;&nbsp;&nbsp;  get: sum, enumerable: true, configurable: true});<br>
                                                             <br>
-                                                            console.log(o.average, o.sum); // 2, 6
+                                                            console.log(o.average, o.sum); <span class="comment">// 2, 6</span>
                                                           </code></div>
 
-                                                          <li>As a constructor</li>
+                                                          <li id="As_a_constructor">As a constructor</li>
                                                           <p>When a function is used as a constructor (with the <code>new</code> keyword),
                                                             its <code>this</code> is bound to the new object being constructed.</p>
                                                             <div class="TEArea"><code>
-                                                              /*<br>
-                                                              &nbsp;* Constructors work like this:<br>
-                                                              &nbsp;*<br>
-                                                              &nbsp;* function MyConstructor(){<br>
-                                                                &nbsp;*&nbsp;   // Actual function body code goes here.<br>
-                                                                &nbsp;*&nbsp;   // Create properties on |this| as<br>
-                                                                &nbsp;*&nbsp;   // desired by assigning to them.  E.g.,<br>
-                                                                &nbsp;*&nbsp;   this.fum = "nom";<br>
-                                                                &nbsp;*&nbsp;   // et cetera...<br>
+                                                              <div class="comment">/*<br>
+                                                                &nbsp;* Constructors work like this:<br>
                                                                 &nbsp;*<br>
-                                                                &nbsp;*&nbsp;   // If the function has a return statement that<br>
-                                                                &nbsp;*&nbsp;   // returns an object, that object will be the<br>
-                                                                &nbsp;*&nbsp;   // result of the |new| expression.  Otherwise,<br>
-                                                                &nbsp;*&nbsp;   // the result of the expression is the object<br>
-                                                                &nbsp;*&nbsp;   // currently bound to |this|<br>
-                                                                &nbsp;*&nbsp;   // (i.e., the common case most usually seen).<br>
-                                                                &nbsp;* }<br>
-                                                                &nbsp;*/<br>
-                                                                <br>
-                                                                function C() {<br>
-                                                                  &nbsp;&nbsp;this.a = 37;<br>
-                                                                }<br>
-                                                                <br>
-                                                                var o = new C();<br>
-                                                                console.log(o.a); // 37<br>
-                                                                <br>
-                                                                <br>
-                                                                function C2() {<br>
-                                                                  &nbsp;&nbsp;this.a = 37;<br>
-                                                                  &nbsp;&nbsp;return {a: 38};<br>
-                                                                }<br>
-                                                                <br>
-                                                                o = new C2();<br>
-                                                                console.log(o.a); // 38
-                                                              </code></div>
-                                                              <p>In the last example (<code>C2</code>), because
-                                                                an object was returned during construction,
-                                                                the new object that <code>this</code> was bound to simply gets
-                                                                discarded. (This essentially makes the statement
-                                                                "<code>this.a = 37;</code>" dead code. It's not exactly dead
-                                                                because it gets executed, but it can be eliminated
-                                                                with no outside effects.)</p>
+                                                                &nbsp;* function MyConstructor(){<br>
+                                                                  &nbsp;*&nbsp;   // Actual function body code goes here.<br>
+                                                                  &nbsp;*&nbsp;   // Create properties on |this| as<br>
+                                                                  &nbsp;*&nbsp;   // desired by assigning to them.  E.g.,<br>
+                                                                  &nbsp;*&nbsp;   this.fum = "nom";<br>
+                                                                  &nbsp;*&nbsp;   // et cetera...<br>
+                                                                  &nbsp;*<br>
+                                                                  &nbsp;*&nbsp;   // If the function has a return statement that<br>
+                                                                  &nbsp;*&nbsp;   // returns an object, that object will be the<br>
+                                                                  &nbsp;*&nbsp;   // result of the |new| expression.  Otherwise,<br>
+                                                                  &nbsp;*&nbsp;   // the result of the expression is the object<br>
+                                                                  &nbsp;*&nbsp;   // currently bound to |this|<br>
+                                                                  &nbsp;*&nbsp;   // (i.e., the common case most usually seen).<br>
+                                                                  &nbsp;* }<br>
+                                                                  &nbsp;*/<br></div>
+                                                                  <br>
+                                                                  function C() {<br>
+                                                                    &nbsp;&nbsp;this.a = 37;<br>
+                                                                  }<br>
+                                                                  <br>
+                                                                  var o = new C();<br>
+                                                                  console.log(o.a); <span class="comment">// 37</span><br>
+                                                                  <br>
+                                                                  <br>
+                                                                  function C2() {<br>
+                                                                    &nbsp;&nbsp;this.a = 37;<br>
+                                                                    &nbsp;&nbsp;return {a: 38};<br>
+                                                                  }<br>
+                                                                  <br>
+                                                                  o = new C2();<br>
+                                                                  console.log(o.a); <span class="comment">// 38</span>
+                                                                </code></div>
+                                                                <p>In the last example (<code>C2</code>), because
+                                                                  an object was returned during construction,
+                                                                  the new object that <code>this</code> was bound to simply gets
+                                                                  discarded. (This essentially makes the statement
+                                                                  "<code>this.a = 37;</code>" dead code. It's not exactly dead
+                                                                  because it gets executed, but it can be eliminated
+                                                                  with no outside effects.)</p>
 
-                                                                <li>As a DOM event handler</li>
-                                                                <p>When a function is used as an event handler,
-                                                                  its <code>this</code> is set to the element the event fired from
-                                                                  (some browsers do not follow this convention for
-                                                                  listeners added dynamically with methods other than <code>addEventListener</code>).</p>
-                                                                  <div class="TEArea"><code>
-                                                                    // When called as a listener, turns the related element blue<br>
-                                                                    function bluify(e) {<br>
-                                                                      &nbsp;&nbsp;// Always true<br>
-                                                                      &nbsp;&nbsp;console.log(this === e.currentTarget); <br>
-                                                                      &nbsp;&nbsp;// true when currentTarget and target are the same object<br>
-                                                                      &nbsp;&nbsp;console.log(this === e.target);<br>
-                                                                      &nbsp;&nbsp;this.style.backgroundColor = '#A5D9F3';<br>
-                                                                    }<br>
-                                                                    <br>
-                                                                    // Get a list of every element in the document<br>
-                                                                    var elements = document.getElementsByTagName('*');<br>
-                                                                    <br>
-                                                                    // Add bluify as a click listener so when the<br>
-                                                                    // element is clicked on, it turns blue<br>
-                                                                    for (var i = 0; i < elements.length; i++) {<br>
-                                                                      &nbsp;&nbsp;elements[i].addEventListener('click', bluify, false);<br>
-                                                                    }
-                                                                  </code></div>
-
-                                                                  <li>In an inline event handler</li>
-                                                                  <p>When the code is called from an inline on-event handler,
-                                                                    its <code>this</code> is set to the DOM element on which the listener is placed:</p>
+                                                                  <li id="As_a_DOM_event_handler">As a DOM event handler</li>
+                                                                  <p>When a function is used as an event handler,
+                                                                    its <code>this</code> is set to the element the event fired from
+                                                                    (some browsers do not follow this convention for
+                                                                    listeners added dynamically with methods other than <code>addEventListener</code>).</p>
                                                                     <div class="TEArea"><code>
-                                                                      &ltbutton onclick="alert(this.tagName.toUpperCase());"><br>
-                                                                      &nbsp;&nbsp;Show this<br>
-                                                                      &lt/button>
+                                                                      <span class="comment">// When called as a listener, turns the related element blue</span><br>
+                                                                      function bluify(e) {<br>
+                                                                        &nbsp;&nbsp;<span class="comment">// Always true</span><br>
+                                                                        &nbsp;&nbsp;console.log(this === e.currentTarget); <br>
+                                                                        &nbsp;&nbsp;<span class="comment">// true when currentTarget and target are the same object</span><br>
+                                                                        &nbsp;&nbsp;console.log(this === e.target);<br>
+                                                                        &nbsp;&nbsp;this.style.backgroundColor = '#A5D9F3';<br>
+                                                                      }<br>
+                                                                      <br>
+                                                                      <span class="comment">// Get a list of every element in the document</span><br>
+                                                                      var elements = document.getElementsByTagName('*');<br>
+                                                                      <br>
+                                                                      <span class="comment">// Add bluify as a click listener so when the</span><br>
+                                                                      <span class="comment">// element is clicked on, it turns blue</span><br>
+                                                                      for (var i = 0; i < elements.length; i++) {<br>
+                                                                        &nbsp;&nbsp;elements[i].addEventListener('click', bluify, false);<br>
+                                                                      }
                                                                     </code></div>
-                                                                    <p>The above alert shows <code>button</code>. Note however that
-                                                                      only the outer code has its <code>this</code> set this way:</p>
+
+                                                                    <li id="In_an_inline_event_handler">In an inline event handler</li>
+                                                                    <p>When the code is called from an inline on-event handler,
+                                                                      its <code>this</code> is set to the DOM element on which the listener is placed:</p>
                                                                       <div class="TEArea"><code>
-                                                                        &ltbutton onclick="alert((function() { return this; })());"><br>
-                                                                        &nbsp;&nbsp;Show inner this<br>
+                                                                        &ltbutton onclick="alert(this.tagName.toUpperCase());"><br>
+                                                                        &nbsp;&nbsp;Show this<br>
                                                                         &lt/button>
                                                                       </code></div>
-                                                                      <p>In this case, the inner function's <code>this</code> isn't set so it returns
-                                                                        the global/window object (i.e. the default object in non–strict
-                                                                        mode where <code>this</code> isn't set by the call).</p>
+                                                                      <p>The above alert shows <code>button</code>. Note however that
+                                                                        only the outer code has its <code>this</code> set this way:</p>
+                                                                        <div class="TEArea"><code>
+                                                                          &ltbutton onclick="alert((function() { return this; })());"><br>
+                                                                          &nbsp;&nbsp;Show inner this<br>
+                                                                          &lt/button>
+                                                                        </code></div>
+                                                                        <p>In this case, the inner function's <code>this</code> isn't set so it returns
+                                                                          the global/window object (i.e. the default object in non–strict
+                                                                          mode where <code>this</code> isn't set by the call).</p>
 
-                                                                      </ul>
-                                                                    </section>
-                                                                    <section class="main-section" id="See_Also">
-                                                                      <header>See Also</header>
-                                                                      <ul>
-                                                                        <li class="none"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict Mode</a></li>
-                                                                        <li class="none"><a href="http://rainsoft.io/gentle-explanation-of-this-in-javascript/">Gentle explanation of 'this' keyword in JavaScript</a></li>
-                                                                      </ul>
-                                                                    </section>
-                                                                    don't forget to add the comment class to all comments<br>
-                                                                    Also, don't forget to add indentation
+                                                                        </ul>
+                                                                      </section>
+                                                                      <section class="main-section" id="See_Also">
+                                                                        <header>See Also</header>
+                                                                        <ul>
+                                                                          <li class="nostyle"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict Mode</a></li>
+                                                                          <li class="nostyle"><a href="http://rainsoft.io/gentle-explanation-of-this-in-javascript/">Gentle explanation of 'this' keyword in JavaScript</a></li>
+                                                                        </ul>
+                                                                      </section>
 
-
-                                                                  </main>
-                                                                  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-                                                                  <!-- Optional JavaScript -->
-                                                                  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                                                                  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-                                                                  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                                                                  crossorigin="anonymous"></script> -->
-                                                                  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                                                                  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                                                                  crossorigin="anonymous"></script> -->
-                                                                  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                                                                  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                                                                  crossorigin="anonymous"></script> -->
-                                                                </body>
-                                                                </html>
+                                                                    </main>
+                                                                    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+                                                                    <!-- Optional JavaScript -->
+                                                                    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                                                                    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                                                                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                                                                    crossorigin="anonymous"></script> -->
+                                                                    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                                                                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                                                                    crossorigin="anonymous"></script> -->
+                                                                    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                                                                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                                                                    crossorigin="anonymous"></script> -->
+                                                                  </body>
+                                                                  </html>
