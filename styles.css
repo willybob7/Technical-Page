@@ -5,15 +5,20 @@ main {
   padding: 0px 10px;
 
 }
-.sidenav {
+#navbar {
     width: 200px;
     position: fixed;
     z-index: 1;
     top: 0px;
     left: 0px;
     background: #eee;
-    overflow-x: hidden;
+    overflow-y: auto;
     padding: 8px 0;
+}
+#navbar ul{
+  height:88%;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
 .sidenav a {
@@ -97,4 +102,15 @@ li {
   width: 100%;
   /* list-style-type: disc; */
   color: black;
+}
+@media only screen and (max-width: 800px) {
+    #navbar {
+      position: absolute;
+      max-height:250px;
+      top: 0;
+      width: 100%;
+    }
+    #main-doc {
+      margin-top: 280px;
+    }
 }
